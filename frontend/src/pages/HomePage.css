@@ -1,0 +1,116 @@
+/* Styles for the HomePage component */
+
+.homepage-content {
+  position: relative;
+  z-index: 2;
+}
+
+.homepage-section {
+  padding: 4rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 3rem;
+  color: var(--text-color);
+}
+
+.how-it-works {
+  background-color: var(--surface-color);
+}
+
+.steps-container {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  gap: 2rem;
+}
+
+.step {
+  max-width: 300px;
+}
+
+.step-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.cta-section {
+  text-align: center;
+  background-color: var(--primary-color-dark);
+  color: white;
+  padding: 4rem 1rem;
+  border-radius: var(--border-radius);
+  margin-top: 2rem;
+  border-bottom: none;
+}
+
+.cta-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  margin-bottom: 2rem;
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 6rem 1rem;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1501281668745-f7f57925c3b4?q=80&w=2070') center/cover;
+  color: white;
+  border-radius: var(--border-radius);
+  margin-bottom: 3rem;
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.25rem;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+/* --- DYNAMIC DRIFTING SHAPES ANIMATION --- */
+@keyframes drift {
+  0% { transform: translate(0px, 0px) rotate(0deg); }
+  25% { transform: translate(30px, -40px) rotate(45deg); }
+  50% { transform: translate(-20px, 20px) rotate(90deg); }
+  75% { transform: translate(40px, 50px) rotate(135deg); }
+  100% { transform: translate(0px, 0px) rotate(180deg); }
+}
+
+.animation-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.shape {
+  position: absolute;
+  display: block;
+  list-style: none;
+  animation-name: drift;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  border-radius: 50%;
+  opacity: 0.15;
+}
