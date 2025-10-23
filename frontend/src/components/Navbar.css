@@ -36,3 +36,25 @@
 .nav-links a:hover {
   color: var(--primary-color);
 }
+
+/* ... existing Navbar.css styles ... */
+
+.nav-link-notifications {
+  position: relative; /* For badge positioning */
+  padding-right: 25px; /* Adjust as needed to make space for the badge */
+}
+
+.notification-badge {
+  position: absolute;
+  top: -5px; /* Adjust vertically */
+  right: 5px; /* Adjust horizontally */
+  background-color: red; /* Or your preferred highlight color */
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75em;
+  font-weight: bold;
+  line-height: 1;
+  min-width: 20px; /* Ensure it's a circle/oval for 1-9, wider for 10+ */
+  text-align: center;
+}

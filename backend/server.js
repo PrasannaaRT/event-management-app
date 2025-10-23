@@ -8,7 +8,10 @@ dotenv.config();
 const authRoutes = require('./routes/auth');
 const eventRoutes = require('./routes/events');
 const checkoutRoutes = require('./routes/checkout');
-const adminRoutes = require('./routes/admin'); // 1. Import admin routes
+const adminRoutes = require('./routes/admin');
+const reviewRoutes = require('./routes/reviews'); // 1. Import review routes
+const organizerRoutes = require('./routes/organizer');
+const notificationRoutes = require('./routes/notificationRoutes');
 
 const app = express();
 
@@ -24,7 +27,10 @@ mongoose.connect(process.env.MONGO_URI)
 
 app.use('/api/auth', authRoutes);
 app.use('/api/events', eventRoutes);
-app.use('/api/admin', adminRoutes); // 2. Use admin routes
+app.use('/api/admin', adminRoutes);
+app.use('/api/reviews', reviewRoutes); // 2. Use review routes
+app.use('/api/organizers', organizerRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 app.get('/', (req, res) => {
   res.send('Event Management API is running!');

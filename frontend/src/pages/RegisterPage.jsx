@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { tamilNaduLocations } from '../utils/locations'; // Import the locations array
 
 const RegisterPage = () => {
   const [formData, setFormData] = useState({
@@ -8,12 +9,14 @@ const RegisterPage = () => {
     email: '',
     password: '',
     role: 'user',
+    location: tamilNaduLocations[0], // ADDED: Default location
     organizationName: '',
   });
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const { name, email, password, role, organizationName } = formData;
+  // Destructure formData including location
+  const { name, email, password, role, organizationName, location } = formData;
 
   const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,15 +27,21 @@ const RegisterPage = () => {
     setError('');
 
     try {
-      await axios.post('http://localhost:5000/api/auth/register', formData);
-      
+      // Ensure all required fields are present if role is organizer
+      if (role === 'organizer' && !organizationName) {
+        setError('Organization Name is required for organizers.');
+        return;
+      }
+
+      await axios.post('http://localhost:5000/api/auth/register', formData); // formData now includes location
+
       // Provide a more specific success message
       if (formData.role === 'organizer') {
         alert('Organizer account created! Your account is pending admin approval.');
       } else {
         alert('Registration successful! Please log in.');
       }
-      
+
       navigate('/login');
 
     } catch (err) {
@@ -47,7 +56,7 @@ const RegisterPage = () => {
       <h1>Register</h1>
       <form onSubmit={onSubmit}>
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        
+
         <input
           type="text"
           name="name"
@@ -73,6 +82,26 @@ const RegisterPage = () => {
           required
           minLength="6"
         />
+
+        {/* --- ADDED LOCATION DROPDOWN --- */}
+        <div className="form-group"> {/* Added a div for better styling/grouping */}
+          <label htmlFor="location">Your Location:</label>
+          <select
+            id="location"
+            name="location" // Important for onChange to work with formData
+            value={location}
+            onChange={onChange}
+            required
+          >
+            {tamilNaduLocations.map((loc) => (
+              <option key={loc} value={loc}>
+                {loc}
+              </option>
+            ))}
+          </select>
+        </div>
+        {/* --- END ADDED LOCATION DROPDOWN --- */}
+
         <div className="role-selector">
           <label>
             <input
@@ -102,7 +131,7 @@ const RegisterPage = () => {
             value={organizationName}
             onChange={onChange}
             placeholder="Organization Name"
-            required
+            required // Made required explicitly here as well
           />
         )}
         <button type="submit">Register</button>

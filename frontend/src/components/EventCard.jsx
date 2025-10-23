@@ -6,7 +6,7 @@ const EventCard = ({ event, delay, children }) => {
   const organizerName = event.organizer ? event.organizer.organizationName : 'Unknown Organizer';
 
   const cardContent = (
-    <div className="event-card" style={{ animationDelay: delay }}>
+    <div className="event-card">
       <div 
         className="event-card-image"
         style={{ backgroundImage: `url(${event.imageUrl || 'https://via.placeholder.com/400x200?text=No+Image'})` }}
@@ -17,7 +17,10 @@ const EventCard = ({ event, delay, children }) => {
       </div>
       <div className="event-card-content">
         <h2>{event.title}</h2>
-        <p className="organizer-name">by {organizerName}</p>
+        {/* Make the organizer name a clickable link */}
+        <p className="organizer-name">
+          by <Link to={`/organizer/${event.organizer._id}`} className="organizer-link">{organizerName}</Link>
+        </p>
         
         <div className="event-card-details">
           <p>
@@ -40,11 +43,11 @@ const EventCard = ({ event, delay, children }) => {
   );
 
   // If there are no children (action buttons), make the whole card a link.
-  // Otherwise, render it as a simple div.
+  // Otherwise, render it as a simple div that animates.
   return children ? (
-    <div className="event-card-link">{cardContent}</div>
+    <div className="event-card-link" style={{ animationDelay: delay }}>{cardContent}</div>
   ) : (
-    <Link to={`/event/${event._id}`} className="event-card-link">
+    <Link to={`/event/${event._id}`} className="event-card-link" style={{ animationDelay: delay }}>
       {cardContent}
     </Link>
   );

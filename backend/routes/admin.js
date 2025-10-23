@@ -1,7 +1,24 @@
+// backend/routes/admin.js
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../middleware/authMiddleware');
-const { getPendingOrganizers, approveOrganizer, rejectOrganizer } = require('../controllers/adminController');
+
+// --- THE FIX IS HERE ---
+// Change this line:
+// const authMiddleware = require('../middleware/authMiddleware');
+// To this:
+const { protect } = require('../middleware/authMiddleware'); // Import protect as a named export
+// --- END FIX ---
+
+const {
+  getPendingOrganizers,
+  approveOrganizer,
+  rejectOrganizer,
+  getStats,
+  getEventsWithAttendees,
+  getRegistrationAnalytics,
+  getCategoryDistribution,
+  getRevenueAnalytics
+} = require('../controllers/adminController');
 
 // Middleware to check if user is an admin
 const adminMiddleware = (req, res, next) => {
@@ -11,19 +28,18 @@ const adminMiddleware = (req, res, next) => {
   next();
 };
 
-// @route   GET /api/admin/pending-organizers
-// @desc    Get all organizers pending verification
-// @access  Private (Admin)
-router.get('/pending-organizers', authMiddleware, adminMiddleware, getPendingOrganizers);
+// Routes for organizer verification (Now using 'protect')
+router.get('/pending-organizers', protect, adminMiddleware, getPendingOrganizers);
+router.patch('/organizers/:id/approve', protect, adminMiddleware, approveOrganizer);
+router.patch('/organizers/:id/reject', protect, adminMiddleware, rejectOrganizer);
 
-// @route   PATCH /api/admin/organizers/:id/approve
-// @desc    Approve an organizer
-// @access  Private (Admin)
-router.patch('/organizers/:id/approve', authMiddleware, adminMiddleware, approveOrganizer);
+// Routes for stats and attendee lists (Now using 'protect')
+router.get('/stats', protect, adminMiddleware, getStats);
+router.get('/events-with-attendees', protect, adminMiddleware, getEventsWithAttendees);
 
-// @route   PATCH /api/admin/organizers/:id/reject
-// @desc    Reject an organizer
-// @access  Private (Admin)
-router.patch('/organizers/:id/reject', authMiddleware, adminMiddleware, rejectOrganizer);
+// Routes for graphical analytics (Now using 'protect')
+router.get('/analytics/registrations', protect, adminMiddleware, getRegistrationAnalytics);
+router.get('/analytics/categories', protect, adminMiddleware, getCategoryDistribution);
+router.get('/analytics/revenue', protect, adminMiddleware, getRevenueAnalytics);
 
 module.exports = router;

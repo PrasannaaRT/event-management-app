@@ -12,6 +12,9 @@
   --border-radius: 8px;
   --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --white-text: #ffffff; /* Added for active-link in sidebar */
+  /* You might need to define --navbar-height if it's used */
+  --navbar-height: 60px; /* Example value, adjust as per your Navbar's actual height */
 }
 
 body {
@@ -240,56 +243,6 @@ main.container {
   font-weight: bold;
 }
 
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 2rem;
-  background-color: var(--surface-color);
-  box-shadow: var(--shadow);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-}
-
-.admin-table th, .admin-table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.admin-table th {
-  background-color: #f8f9fa;
-}
-
-.admin-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
-/* --- NEW ADMIN TABLE STYLES --- */
-
-.admin-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 2rem;
-  background-color: var(--surface-color);
-  box-shadow: var(--shadow);
-  border-radius: var(--border-radius);
-  overflow: hidden;
-}
-
-.admin-table th, .admin-table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.admin-table th {
-  background-color: #f8f9fa;
-}
-
-.admin-table tbody tr:last-child td {
-  border-bottom: none;
-}
-
 /* --- NEW FILTER & SEARCH STYLES --- */
 
 .filters-container {
@@ -328,4 +281,381 @@ main.container {
   font-size: 1rem;
   background-color: white;
   cursor: pointer;
+}
+
+/* --- NEW REVIEW SECTION & META STYLES --- */
+
+.event-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  margin: 1rem 0;
+  color: var(--text-color-light);
+  font-size: 0.9rem;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-color);
+  margin: 2rem 0;
+}
+
+.reviews-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.review-form {
+  background-color: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 2rem;
+}
+
+.review-form h3 {
+  margin-top: 0;
+}
+
+.review-form textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: inherit;
+  resize: vertical;
+  min-height: 100px;
+  margin-bottom: 1rem;
+}
+
+.review-card {
+  background-color: var(--surface-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 1.5rem;
+}
+
+.review-card p {
+  margin: 0.5rem 0;
+}
+
+.review-card small {
+  color: var(--text-color-light);
+}
+
+.star-rating {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.star-rating button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0 2px;
+}
+
+.star-rating .star {
+  font-size: 2.5rem;
+  transition: color 0.2s;
+}
+
+.star-rating .star-filled {
+  color: #ffc107;
+}
+
+.star-rating .star-empty {
+  color: #e4e5e9;
+}
+
+.success-message {
+  color: #28a745;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+.error-message {
+  color: #dc3545;
+  margin-top: 1rem;
+}
+
+/* --- NEW ORGANIZER PROFILE PAGE STYLES --- */
+
+.organizer-profile-header {
+  text-align: center;
+  padding: 2rem;
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 3rem;
+}
+
+.organizer-profile-header h1 {
+  margin: 0 0 1rem;
+  font-size: 2.5rem;
+}
+
+.organizer-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  color: var(--text-color-light);
+  margin-bottom: 1.5rem;
+}
+
+.organizer-bio {
+  max-width: 700px;
+  margin: 0 auto 1.5rem auto;
+  line-height: 1.6;
+}
+
+.organizer-link {
+  color: var(--text-color-light);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.organizer-link:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* Re-using .event-card-link class for the container */
+.event-card-container {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0;
+  animation: cardEnter 0.5s ease-out forwards;
+}
+
+/* --- Admin Dashboard Layout --- */
+.admin-dashboard-container {
+  display: flex;
+  min-height: calc(100vh - var(--navbar-height)); /* Adjust based on your navbar height */
+  background-color: var(--background-color);
+}
+
+.admin-sidebar {
+  width: 250px;
+  background-color: var(--surface-color);
+  padding: 2rem 1rem;
+  box-shadow: var(--shadow);
+  border-right: 1px solid var(--border-color);
+  flex-shrink: 0; /* Prevent sidebar from shrinking */
+}
+
+.sidebar-title {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.admin-sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.admin-sidebar li {
+  margin-bottom: 1rem;
+}
+
+.admin-sidebar a {
+  display: block;
+  padding: 0.8rem 1rem;
+  color: var(--text-color);
+  text-decoration: none;
+  border-radius: var(--border-radius);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.admin-sidebar a:hover {
+  background-color: var(--primary-color-light);
+  color: var(--primary-color-dark);
+}
+
+.admin-sidebar a.active-link {
+  background-color: var(--primary-color);
+  color: var(--white-text);
+  font-weight: bold;
+}
+
+.admin-content {
+  flex-grow: 1; /* Allows content to take remaining space */
+  padding: 2rem;
+  background-color: var(--background-color);
+}
+
+.admin-section {
+    background-color: var(--surface-color); /* White background for individual sections */
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem; /* Space between sections if multiple are displayed on one page */
+}
+
+
+/* --- Admin Table Styles (Consolidated) --- */
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 2rem;
+  background-color: var(--surface-color);
+  box-shadow: var(--shadow);
+  border-radius: var(--border-radius);
+  overflow: hidden; /* Ensures rounded corners on children */
+}
+
+.admin-table th, .admin-table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-table th {
+  background-color: #f8f9fa; /* Light background for headers */
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: none; /* No border for the last row */
+}
+
+
+/* --- Admin STATS & ACCORDION STYLES --- */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background-color: var(--surface-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.stat-card h3 {
+  margin: 0 0 0.5rem;
+  color: var(--text-color-light);
+  font-size: 1rem;
+}
+
+.stat-card p {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.accordion {
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.accordion-item {
+  border-bottom: 1px solid var(--border-color);
+}
+.accordion-item:last-child {
+  border-bottom: none;
+}
+
+.accordion-title {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  background-color: var(--surface-color);
+  border: none;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s;
+}
+
+.accordion-title:hover {
+  background-color: #f8f9fa;
+}
+
+.accordion-content {
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+}
+
+.attendee-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.attendee-table th, .attendee-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+.attendee-table th {
+  background-color: #e9ecef;
+}
+
+/* --- ADMIN CHART STYLES (Consolidated & Revised) --- */
+
+.charts-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.chart-card {
+  background-color: var(--surface-color);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  height: 350px; /* Fixed height for the card */
+}
+
+.chart-card h3 {
+  margin-top: 0;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--text-color-dark);
+}
+
+/* Wrapper for the canvas to control its dimensions */
+.chart-wrapper {
+  position: relative;
+  width: 100%;
+  flex-grow: 1; /* Allows it to take up available vertical space */
+  display: flex; /* Helps center the canvas within if needed */
+  justify-content: center;
+  align-items: center;
+  /* padding-bottom: 1rem; */ /* Removed for tighter fit if height is fixed */
+}
+
+/* Ensure canvas elements fit within their wrappers */
+.chart-wrapper canvas {
+  width: 100% !important; 
+  height: 100% !important; 
+  max-width: 100%;
+  max-height: 100%;
+  cursor: pointer;
+  object-fit: contain; /* Ensures the chart scales down without being cropped */
+}
+
+/* Specific size adjustments for pie chart if needed - currently none needed beyond general canvas */
+.chart-pie-container .chart-wrapper canvas {
+  /* max-width: 90%; */ /* Removed, let it use 100% if fitting */
+  /* max-height: 90%; */ /* Removed, let it use 100% if fitting */
 }

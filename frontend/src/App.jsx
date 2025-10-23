@@ -14,9 +14,12 @@ import DashboardPage from './pages/DashboardPage';
 import CreateEventPage from './pages/CreateEventPage';
 import EditEventPage from './pages/EditEventPage';
 import EventDetailPage from './pages/EventDetailPage';
-import ProtectedRoute from './components/auth/ProtectedRoute';
+import ProtectedRoute from './components/auth/ProtectedRoute'; // This is your actual ProtectedRoute import
 import PaymentSuccessPage from './pages/PaymentSuccessPage';
 import AdminPage from './pages/AdminPage';
+import OrganizerProfilePage from './pages/OrganizerProfilePage';
+import NotificationsPage from './pages/NotificationsPage'; // Notifications page
+
 
 // The background animation component is defined here for simplicity
 const AnimatedBackground = () => {
@@ -77,13 +80,19 @@ function App() {
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/payment-success" element={<PaymentSuccessPage />} />
+            <Route path="/organizer/:id" element={<OrganizerProfilePage />} />
+            <Route path="/event/:id" element={<EventDetailPage />} />
 
             {/* --- Protected Routes (User must be logged in) --- */}
             <Route path="/dashboard" element={<ProtectedRoute><DashboardPage /></ProtectedRoute>} />
             <Route path="/create-event" element={<ProtectedRoute><CreateEventPage /></ProtectedRoute>} />
             <Route path="/event/edit/:id" element={<ProtectedRoute><EditEventPage /></ProtectedRoute>} />
-            <Route path="/event/:id" element={<ProtectedRoute><EventDetailPage /></ProtectedRoute>} />
-            <Route path="/admin" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
+
+            {/* Notifications Page - now correctly using ProtectedRoute */}
+            <Route path="/notifications" element={<ProtectedRoute><NotificationsPage /></ProtectedRoute>} />
+
+            {/* Admin Route - **Changed to wildcard to allow nested routes for AdminPage** */}
+            <Route path="/admin/*" element={<ProtectedRoute><AdminPage /></ProtectedRoute>} />
           </Routes>
         </main>
         <Footer />
